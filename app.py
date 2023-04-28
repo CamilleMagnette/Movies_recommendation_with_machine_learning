@@ -8,6 +8,9 @@ import pandas as pd
 
 # IMPORTER LES DATAFRAMES UTILISES
 liste_films = pd.read_pickle("liste_films.pkl.gz")
+liste_genres = pd.read_pickle("liste_genres.pkl.gz")
+liste_acteurs = pd.read_pickle("liste_acteurs.pkl.gz")
+
 
 # CONFIGURER LA PAGE
 st.set_page_config(
@@ -31,10 +34,10 @@ with st.form("form 4"):
             films = st.selectbox("Films : ", list_film_deroulante)
             st.write("Tu as choisis : ", films, ". Bon choix ;)")
         with col2 :
-            genres = st.multiselect("Genres : ", ["Drama", "Comedy,Drama", "Drama,Romance", "Documentary", "Comedy"])
+            genres = st.multiselect("Genres : ", liste_genres)
             st.write("Tu as choisis", len(genres), 'genre(s)')
         with col3 :
-            acteurs = st.multiselect("Acteurs : ", ["Leo", "Alain", "Clint", "Marylin"])
+            acteurs = st.multiselect("Acteurs : ", liste_acteurs)
             st.write("Tu as choisis", len(acteurs), 'acteur(trice)')
         with col4 :
             année = st.slider("Année", 1913, 2023)
