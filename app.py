@@ -2,8 +2,12 @@
 # Commande qui permet d'écrire dans le fichier app.py
 # %%writefile app.py
 
-# IMPORTER LA LIVRAIRIE
+# IMPORTER LES LIBRAIRIES
 import streamlit as st
+import pandas as pd 
+
+# IMPORTER LES DATAFRAMES UTILISES
+liste_films = pd.read_pickle("liste_films.pkl.gz")
 
 # CONFIGURER LA PAGE
 st.set_page_config(
