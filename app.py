@@ -1,8 +1,13 @@
+# A METTRE DANS JUPITER 
+# Commande qui permet d'écrire dans le fichier app.py
+# %%writefile app.py
 
+# IMPORTER LA LIVRAIRIE
 import streamlit as st
 
+# CONFIGURER LA PAGE
 st.set_page_config(
-    page_title="Ex-stream-ly Cool App",
+    page_title="Recommandation de Film App",
     layout="wide",
     page_icon=":🎞️:")
 
