@@ -11,19 +11,20 @@ st.set_page_config(
     layout="wide",
     page_icon=":🎞️:")
 
-#title
+# TITRE
 st.title("Bienvenue dans notre humble application de remmandation de film")
 
-# Header
+# SOUS TITRE
 st.header("Dis moi quel film tu aimes et je t'en ferai aimer d'autres")
 
-# multi select box
-# first argument takes the box title
-# second argument takes the options to show
+# MULTI SELECT BOX : first argument takes the box title, second argument takes the options to show
+
+list_film_deroulante = ["Tape le film que tu aimes"] + list(liste_films["primaryTitle"])
+
 with st.form("form 4"):
         col1, col2, col3, col4 = st.columns(4)
         with col1 :
-            films = st.selectbox("Films : ", ['Dis moi quel film tu aimes', 'Film1', 'film2', 'film3'])
+            films = st.selectbox("Films : ", list_film_deroulante)
             st.write("Tu as choisis : ", films, ". Bon choix ;)")
         with col2 :
             genres = st.multiselect("Genres : ", ["Drama", "Comedy,Drama", "Drama,Romance", "Documentary", "Comedy"])
@@ -36,5 +37,5 @@ with st.form("form 4"):
             st.text('Choisie : {}'.format(année))
         submit : st.form_submit_button("Soumettre")
         
-# Subheader
+# SOUS TITRE
 st.subheader("Bon visionnage !")
