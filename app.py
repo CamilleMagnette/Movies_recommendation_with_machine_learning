@@ -38,7 +38,7 @@ with st.form("form 4"):
             genres = st.multiselect("Genres : ", liste_genres)
             st.write("Tu as choisis", len(genres), 'genre(s)')
         with col3 :
-            acteurs = st.multiselect("Acteurs : ", liste_acteurs)
+            acteurs = st.selectbox("Acteurs : ", liste_acteurs)
             st.write("Tu as choisis", len(acteurs), 'acteur(trice)')
         with col4 :
             start_year, end_year = st.select_slider('Années',
