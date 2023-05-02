@@ -45,7 +45,8 @@ with st.form("form 4"):
         submit = st.form_submit_button("Soumettre")
  
 if submit : 
-    st.write("Vous avez choisi le film {}, les genres {}, ainsi que l'acteur/actrice {} entre les années {}\n je vous suggère fortement :".format(films, "/".join(genres), acteurs, str(start_year) +'-'+ str(end_year)))
+    st.write("Vous avez choisi le film {}, les genres {}, ainsi que l'acteur/actrice {} entre les années {}".format(films, "/".join(genres), acteurs, str(start_year) +'-'+ str(end_year)))
+    st.write("je vous suggère fortement :")
 
     # SOUS TITRE
 st.subheader("Bon visionnage !")
