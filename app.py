@@ -27,7 +27,8 @@ st.header("Dis moi quel film tu aimes et je t'en ferai aimer d'autres")
 # MULTI SELECT BOX : first argument takes the box title, second argument takes the options to show
 
 list_film_deroulante_films = ["Tape le film que tu aimes"] + list(liste_films["primaryTitle"])
-list_film_deroulante_acteurs = [""] + list(liste_acteurs["primaryName"])
+list_film_deroulante_genres = ["Choisis les genres que tu aimes"] + list(liste_genres["genres"])
+list_film_deroulante_acteurs = ["Choisis un acteur que tu aimes"] + list(liste_acteurs["primaryName"])
 
                                       
 with st.form("form 4"):
@@ -36,7 +37,7 @@ with st.form("form 4"):
             films = st.selectbox("Films : ", list_film_deroulante_films)
             st.write("Tu as choisis : ", films, ". Bon choix ;)")
         with col2 :
-            genres = st.multiselect("Genres : ", liste_genres)
+            genres = st.multiselect("Genres : ", list_film_deroulante_genres)
         with col3 :
             acteurs = st.selectbox("Acteurs : ", list_film_deroulante_acteurs)
         with col4 :
