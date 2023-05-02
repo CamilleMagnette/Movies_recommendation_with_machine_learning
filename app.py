@@ -40,8 +40,9 @@ with st.form("form 4"):
             acteurs = st.multiselect("Acteurs : ", liste_acteurs)
             st.write("Tu as choisis", len(acteurs), 'acteur(trice)')
         with col4 :
-            année = st.slider("Année", 1913, 2023)
+            année = st.slider("Année(s)", 1913, 2023, (25.0,75.0))
             st.text('Choisie : {}'.format(année))
+            st.write('Values', année)
         submit : st.form_submit_button("Soumettre")
         
 # SOUS TITRE
