@@ -46,6 +46,9 @@ with st.form("form 4"):
                                     value=(1913, 2023))
             st.write('Vous avez choisi les années entre', start_year, 'et', end_year)
         submit : st.form_submit_button("Soumettre")
-        
+ 
+if submit : 
+    st.write('Tu as choisi le film : 'films ', le genre :' genres 'entre les années' start_year 'et' end_year') 
+ 
 # SOUS TITRE
 st.subheader("Bon visionnage !")
