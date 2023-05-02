@@ -19,7 +19,7 @@ st.set_page_config(
     page_icon=":🎞️:")
 
 # TITRE
-st.title("Application de remmandation de films")
+st.title("Application de recommandation de films")
 
 # SOUS TITRE
 st.header("Dis moi quel film tu aimes et je t'en ferai aimer d'autres")
