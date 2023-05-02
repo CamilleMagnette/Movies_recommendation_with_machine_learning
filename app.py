@@ -36,10 +36,8 @@ with st.form("form 4"):
             st.write("Tu as choisis : ", films, ". Bon choix ;)")
         with col2 :
             genres = st.multiselect("Genres : ", liste_genres)
-            st.write("Tu as choisis", len(genres), 'genre(s)')
         with col3 :
             acteurs = st.selectbox("Acteurs : ", liste_acteurs)
-            st.write("Tu as choisis", len(acteurs), 'acteur(trice)')
         with col4 :
             start_year, end_year = st.select_slider('Années',
                                     options=liste_annees["startYear"],
@@ -48,8 +46,7 @@ with st.form("form 4"):
         submit : st.form_submit_button("Soumettre")
  
 #if submit : 
-#    st.write("Tu as choisi le film : "films" , le genre : " genres "entre les années" start_year "et" end_year) 
-#            st.write('Vous avez choisi les années entre', start_year, 'et', end_year)
+    st.write("Tu as choisi le film : ", films, " , le genre : ", genres ,"entre les années", start_year ,"et", end_year) 
 
 # SOUS TITRE
 st.subheader("Bon visionnage !")
