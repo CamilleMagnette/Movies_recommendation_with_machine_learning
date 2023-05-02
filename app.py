@@ -42,7 +42,7 @@ with st.form("form 4"):
             start_year, end_year = st.select_slider('Années',
                                     options=liste_annees["startYear"],
                                     value=(1913, 2023))
-        submit : st.form_submit_button("Soumettre")
+        submit = st.form_submit_button("Soumettre")
  
 if submit : 
 #    st.write('Vous avez choisi les années entre', start_year, 'et', end_year)
