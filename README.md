@@ -23,6 +23,10 @@ Outils principaux : scikit-learn
 
 Semaine 5 : Affinage, présentation et Demo Day
 
+**PRESENTATION**
 
+DATAVIZ
 [LIEN GRAPHIQUES](https://cloud.datapane.com/reports/VkGQlN3/exploration-des-donn%C3%A9es/)
 
+MACHINE LEARNING
+[LIEN STREMLIT](https://camillemagnette-application-cinema-app-8u0pz7.streamlit.app/)
