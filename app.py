@@ -5,12 +5,18 @@
 # IMPORTER LES LIBRAIRIES
 import streamlit as st
 import pandas as pd 
+from sklearn.neighbors import NearestNeighbors
+from sklearn import datasets
 
 # IMPORTER LES DATAFRAMES UTILISES
 liste_films = pd.read_pickle("liste_films.pkl.gz")
 liste_genres = pd.read_pickle("liste_genres.pkl.gz")
 liste_acteurs = pd.read_pickle("liste_acteurs.pkl.gz")
 liste_annees = pd.read_pickle("liste_annees.pkl.gz")
+
+# A REGARDER 
+# df_merge_finalML = pd.read_pickle("df_merge_finalML.pkl.gz")
+
 
 # CONFIGURER LA PAGE
 st.set_page_config(
@@ -24,12 +30,17 @@ st.title("Application de recommandation de films")
 # SOUS TITRE
 st.header("Dis moi quel film tu aimes et je t'en ferai aimer d'autres")
 
-# MULTI SELECT BOX : first argument takes the box title, second argument takes the options to show
+# Subheader
+st.subheader("Choisi obligatoirement ton film préféré")
 
+# LISTES 
 list_film_deroulante_films = ["Tape le film que tu aimes"] + list(liste_films["primaryTitle"])
 list_film_deroulante_acteurs = ["Choisis un acteur que tu aimes"] + list(liste_acteurs["primaryName"])
+list_film_deroulante_genres = list(liste_genres["genres"])
+list_deroulante_anneeS = list(liste_annees["startYear"])
 
-                                      
+# MULTI SELECT BOX : first argument takes the box title, second argument takes the options to show
+                            
 with st.form("form 4"):
         col1, col2, col3, col4 = st.columns(4)
         with col1 :
