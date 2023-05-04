@@ -60,7 +60,6 @@ with st.form("form 3"):
             st.write("Tu as choisis", len(genres), 'genre(s)')
         with col2 :
             acteurs = st.selectbox(label = "Acteurs : ", options = list_film_deroulante_acteurs)
-            st.write("Tu as choisis", len(acteurs), 'acteur(trice)')
 
         with col3 :
             start_year, end_year = st.select_slider(label = "Sélectionne une plage d'année",
