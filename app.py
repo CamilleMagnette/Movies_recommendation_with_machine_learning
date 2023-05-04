@@ -45,7 +45,7 @@ X = df_dummies_2.iloc[:,5:25000]
 # On entraine notre modele uniquement sur les 4 voisin les plus proches sur l'ensemble des colonnes choisies
 model_KNN_distance = NearestNeighbors(n_neighbors=4).fit(X)
 
-# A FAIRE : REALISER UNE STANDARDISATION 
+# A FAIRE : REALISER UNE STANDARDISATION : on harmonise l'échelle des abscisses et des ordonnées. On réindice l'ensemble des valeurs pour rentrer dans le même cadre d'analyse et réaliser des classifications. 
 # Préciser que toutes les colonnes sont de la même importance et de la même grandeur
 # Scale data
 # scaler = StandardScaler().fit(X)
