@@ -43,7 +43,7 @@ X = df_dummies_2.iloc[:,5:25000]
 # On entraine notre modele uniquement sur les 4 voisin les plus proches sur l'ensemble des colonnes choisies
 model_KNN_distance = NearestNeighbors(n_neighbors=4).fit(X)
 
-# Choixi du film 
+# Choix du film 
 films = st.selectbox("Films : ",liste_films_deroulante_films)
 st.write(films, ". Bon choix ;)")
 
