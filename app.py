@@ -13,10 +13,7 @@ liste_films = pd.read_pickle("liste_films.pkl.gz")
 liste_genres = pd.read_pickle("liste_genres.pkl.gz")
 liste_acteurs = pd.read_pickle("liste_acteurs.pkl.gz")
 liste_annees = pd.read_pickle("liste_annees.pkl.gz")
-
-# A REGARDER 
-# df_merge_finalML = pd.read_pickle("df_merge_finalML.pkl.gz")
-
+df_dummies_2 = pd.read_pickle("df_dummies_2.pkl.gz")
 
 # CONFIGURER LA PAGE
 st.set_page_config(
