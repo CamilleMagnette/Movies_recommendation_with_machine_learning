@@ -7,6 +7,8 @@ import streamlit as st
 import pandas as pd 
 from sklearn.neighbors import NearestNeighbors
 from sklearn import datasets
+from sklearn.preprocessing import StandardScaler
+
 
 # IMPORTER LES DATAFRAMES UTILISES
 liste_films = pd.read_pickle("liste_films.pkl.gz")
@@ -43,6 +45,13 @@ X = df_dummies_2.iloc[:,5:25000]
 # On entraine notre modele uniquement sur les 4 voisin les plus proches sur l'ensemble des colonnes choisies
 model_KNN_distance = NearestNeighbors(n_neighbors=4).fit(X)
 
+# A FAIRE
+# Préciser que toutes les colonnes sont de la même importance et de la même grandeur
+# Scale data
+# scaler = StandardScaler().fit(X)
+# X_scaled = scaler.transform(X)
+
+
 # Choix du film 
 films = st.selectbox("Films : ",list_film_deroulante_films)
 st.write(films, ". Bon choix ;)")
@@ -72,8 +81,10 @@ with st.form("form 3"):
 st.write("Vous avez choisi le film {}, les genres {}, ainsi que l'acteur/actrice {} entre les années {}".format(films, "/".join(genres), acteurs, str(start_year) +'-'+ str(end_year)))
 st.write("je vous suggère fortement :")          
 
+# MACHINE LEARNING 
+
 if submit : 
-    # MACHINE LEARNING 
+    
     #création d'une liste avec le film selectionné par l'utilisateur
             liste_du_film = [films]
         
@@ -90,6 +101,9 @@ if submit :
             suggestion = df_dummies_2.iloc[indice[0,1:]]['primaryTitle'].values
             st.write("On peut remplacer", films, "par :", suggestion)
   
+
+
+
 
 # SOUS TITRE
 st.subheader("Bon visionnage !")
