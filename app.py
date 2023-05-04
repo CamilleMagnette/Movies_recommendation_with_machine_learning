@@ -44,7 +44,7 @@ X = df_dummies_2.iloc[:,5:25000]
 model_KNN_distance = NearestNeighbors(n_neighbors=4).fit(X)
 
 # Choix du film 
-films = st.selectbox("Films : ",liste_films_deroulante_films)
+films = st.selectbox("Films : ",list_film_deroulante_films)
 st.write(films, ". Bon choix ;)")
 
 # Subheader
