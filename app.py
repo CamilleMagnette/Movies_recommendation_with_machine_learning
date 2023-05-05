@@ -29,8 +29,8 @@ st.sidebar.success("Select Any Page from here")
 
 
 # 1er ONGLET 
-st.set_page_config(page_title="Recommandation", page_icon="📈")
-st.markdown("# Recommandation")
+#st.set_page_config(page_title="Recommandation", page_icon="📈")
+#st.markdown("# Recommandation")
 
 # TITRE
 st.title("Application de recommandation de films")
