@@ -25,8 +25,7 @@ st.set_page_config(
     page_icon=":🎞️:")
 
 # CONFIGURER DES ONGLETS AU SEIN DE LA PAGE
-stm.sidebar.success("Select Any Page from here")
-
+st.sidebar.success("Select Any Page from here")
 #st.set_page_config(page_title="Recommandation", page_icon="📈")
 #st.markdown("# Recommandation")
 
