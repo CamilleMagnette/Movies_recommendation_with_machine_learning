@@ -2,10 +2,6 @@
 # Commande qui permet d'écrire dans le fichier app.py
 # %%writefile app.py
 
-import streamlit as stm
-  
-
-
 
 # IMPORTER LES LIBRAIRIES
 import streamlit as st
