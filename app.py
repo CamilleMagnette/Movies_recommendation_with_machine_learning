@@ -2,6 +2,11 @@
 # Commande qui permet d'écrire dans le fichier app.py
 # %%writefile app.py
 
+import streamlit as stm
+  
+
+
+
 # IMPORTER LES LIBRAIRIES
 import streamlit as st
 import pandas as pd 
@@ -22,6 +27,8 @@ st.set_page_config(
     page_title="Recommandation de Film App",
     layout="wide",
     page_icon=":🎞️:")
+
+stm.sidebar.success("Select Any Page from here")
 
 # TITRE
 st.title("Application de recommandation de films")
