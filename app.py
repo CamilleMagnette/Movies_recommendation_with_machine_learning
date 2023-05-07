@@ -23,7 +23,7 @@ st.set_page_config(
     page_title="Recommandation de Film App",
     layout="wide",
     page_icon=":🎞️:")
-uigigiygigiggi
+
 # CONFIGURER DES ONGLETS AU SEIN DE LA PAGE
 st.sidebar.success("Select Any Page from here")
 
