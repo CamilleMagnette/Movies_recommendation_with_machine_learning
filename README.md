@@ -1,4 +1,4 @@
-# Outil de recommandation de films :
+# 🎯 Outil de recommandation de films :
 
 Il s'agit ici du résultat du second projet mené pendant ma formation à la Wild Code School.
 
