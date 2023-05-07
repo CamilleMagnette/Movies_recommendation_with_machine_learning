@@ -12,18 +12,18 @@ from sklearn.preprocessing import StandardScaler
 
 
 # IMPORTER LES DATAFRAMES UTILISES
-liste_films = pd.read_pickle("liste_films.pkl.gz")
-liste_genres = pd.read_pickle("liste_genres.pkl.gz")
-liste_acteurs = pd.read_pickle("liste_acteurs.pkl.gz")
-liste_annees = pd.read_pickle("liste_annees.pkl.gz")
-df_dummies_2 = pd.read_pickle("df_dummies_2.pkl.gz")
+liste_films = pd.read_pickle("./Databases/liste_films.pkl.gz")
+liste_genres = pd.read_pickle("./Databases/liste_genres.pkl.gz")
+liste_acteurs = pd.read_pickle("./Databases/liste_acteurs.pkl.gz")
+liste_annees = pd.read_pickle("./Databases/liste_annees.pkl.gz")
+df_dummies_2 = pd.read_pickle("./Databases/df_dummies_2.pkl.gz")
 
 # CONFIGURER LA PAGE
 st.set_page_config(
     page_title="Recommandation de Film App",
     layout="wide",
     page_icon=":🎞️:")
-
+uigigiygigiggi
 # CONFIGURER DES ONGLETS AU SEIN DE LA PAGE
 st.sidebar.success("Select Any Page from here")
 
