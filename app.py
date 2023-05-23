@@ -62,7 +62,7 @@ list_film_deroulante_acteurs = ["Choisis un acteur que tu aimes"] + list(liste_a
 list_film_deroulante_genres = list(liste_genres["genres"])
 
 
-
+"""
 # REQUETE API 
 
 # site : https://www.omdbapi.com/
@@ -271,7 +271,7 @@ with st.form("form 2"):
                     st.write(' - {} '.format(films_genre))
     
     
-    
+"""
 
 # SOUS-TITRE
 st.subheader("Bon visionnage ! 🍿🍿🍿 ")
