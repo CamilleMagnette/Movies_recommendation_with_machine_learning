@@ -105,9 +105,6 @@ with st.form("form 1"):
 
     if submit_1 : 
 
-        # Création d'une liste avec le film selectionné par l'utilisateur
-        liste_du_film = [films]
-
         # Obtenir tous les renseignements du film
         df_film_choisi = df_machine_learning[(df_machine_learning["primaryTitle"] == films) | (df_machine_learning["originalTitle"] == films) | (df_machine_learning["French_Title"] == films)]
 
