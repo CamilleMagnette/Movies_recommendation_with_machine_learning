@@ -1,88 +1,90 @@
+# IMPORTS
 
 # IMPORTER LES LIBRAIRIES
 import streamlit as st
 import pandas as pd 
 from sklearn.neighbors import NearestNeighbors
-from sklearn import datasets
+#from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 import requests
 
-
 # IMPORTER LES DATAFRAMES UTILISES QUAND ON EST SUR GIT HUB
-liste_films = pd.read_pickle("./Databases/liste_films.pkl.gz")
-liste_genres = pd.read_pickle("./Databases/liste_genres.pkl.gz")
-liste_acteurs = pd.read_pickle("./Databases/liste_acteurs.pkl.gz")
-liste_annees = pd.read_pickle("./Databases/liste_annees.pkl.gz")
-df_machine_learning = pd.read_pickle("./Databases/df_machine_learning.pkl.gz")
+# liste_films = pd.read_pickle("./Databases/liste_films.pkl.gz")
+# liste_genres = pd.read_pickle("./Databases/liste_genres.pkl.gz")
+# liste_acteurs = pd.read_pickle("./Databases/liste_acteurs.pkl.gz")
+# liste_annees = pd.read_pickle("./Databases/liste_annees.pkl.gz")
+# df_machine_learning = pd.read_pickle("./Databases/df_machine_learning.pkl.gz")
 
 # IMPORTER LES DATAFRAMES UTILISES QUAND ON EST EN LOCAL 
-#liste_films = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_films.pkl.gz")
-#liste_genres = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_genres.pkl.gz")
-#liste_acteurs = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_acteurs.pkl.gz")
-#liste_annees = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_annees.pkl.gz")
-#df_machine_learning = pd.read_pickle("./df_machine_learning.pkl.gz")
+liste_films = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_films.pkl.gz")
+liste_genres = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_genres.pkl.gz")
+liste_acteurs = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_acteurs.pkl.gz")
+liste_annees = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_annees.pkl.gz")
+df_machine_learning = pd.read_pickle("./df_machine_learning.pkl.gz")
 
 # SUPPRIMER LES DOUBLONS
 df_machine_learning = df_machine_learning.drop_duplicates(subset = "tconst")
 
+
+
 # CONFIGURER LA PAGE
+
 st.set_page_config(
     page_title="Recommandation de Film App",
     layout="wide",
     page_icon=":🎞️:")
 
-# CONFIGURER DES ONGLETS AU SEIN DE LA PAGE
-# st.sidebar.success("Select Any Page from here")
-
-# 1er ONGLET 
-#st.set_page_config(page_title="Recommandation", page_icon="📈")
-#st.markdown("# Recommandation")
-
 # TITRE
 st.title("🎥 Recommandation de films")
 
 # SOUS TITRE
-st.header("Dis moi quels sont tes goûts et je te ferai découvrir de nouveaux films 💡")
-
+st.header("Dis moi quels sont tes goûts et je te ferai découvrir de nouveaux films 💡🎬")
 
 # MISE EN FORME FOND DE PAGE 
 page_bg_img = """
 <style>
 [data-testid = "stAppViewContainer"] {
-
 background-color: #e5e5f7;
 opacity: 0.8;
 background-image: radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px);
-background-size: 10px 10px;
-
-}
-
+background-size: 10px 10px; }
 </style>
 """
 
 st.markdown(page_bg_img, unsafe_allow_html = True)
 
 
+
 # LISTES 
+
 list_film_deroulante_films = ["Tape le film que tu aimes"] + list(liste_films["primaryTitle"])
 list_film_deroulante_acteurs = ["Choisis un acteur que tu aimes"] + list(liste_acteurs["primaryName"])
 list_film_deroulante_genres = list(liste_genres["genres"])
-#list_deroulante_annees = list(liste_annees["startYear"])
 
-# MACHINE LEARNING
-# recommandation sur la base du nom d'un film (tconst) en se basant sur les paramètres numériques suivants : => startYear, runtimeMinutes, averageRating, numVotes, genres
 
-# Définir X
-X = df_machine_learning.iloc[:,8:] # toutes les lignes et toutes les colonnes à partir d'index 8 (colonnes avec valeurs numériques)
+
+# REQUETE API 
+
+# site : https://www.omdbapi.com/
+# demande de key API : key = aa10e4e0
+url_api = "http://www.omdbapi.com/?i="
+key_api = "&apikey=aa10e4e0"
+
+
+
+# MACHINE LEARNING : recommandation sur la base du nom d'un film (tconst) en se basant sur les paramètres numériques suivants : startYear, runtimeMinutes, averageRating, numVotes, genres
+
+# Définir X => toutes les lignes et toutes les colonnes à partir d'index 8 (colonnes avec valeurs numériques)
+X = df_machine_learning.iloc[:,8:] 
 
 # Réaliser la standardisation : on harmonise l'échelle des abscisses et des ordonnées. 
 # On réindice l'ensemble des valeurs pour rentrer dans le même cadre d'analyse et réaliser des classifications. 
-# Préciser que toutes les colonnes sont de la même importance et de la même grandeur
-#scaler = preprocessing.StandardScaler().fit(X)
-#X_scaled = scaler.transform(X)
+# scaler = preprocessing.StandardScaler().fit(X)
+# X_scaled = scaler.transform(X)
 
 # On entraine notre modele uniquement sur les 4 voisin les plus proches sur l'ensemble des colonnes choisies (metric = calcul de la distance avec le calcul cosinus)
 model_KNN_distance = NearestNeighbors(n_neighbors = 4, metric = "cosine", algorithm = "brute").fit(X)
+
 
 
 # CHOIX DU FILM PAR L'UTILISATEUR
@@ -95,7 +97,7 @@ with st.form("form 1"):
     # Mise en place du choix utilisateurs
     films = st.selectbox("Films : ",list_film_deroulante_films)
 
-    # bouton submit
+    # Bouton submit
     submit_1 = st.form_submit_button("Soumettre")
 
         
@@ -103,38 +105,25 @@ with st.form("form 1"):
 
     if submit_1 : 
 
-        #création d'une liste avec le film selectionné par l'utilisateur
+        # Création d'une liste avec le film selectionné par l'utilisateur
         liste_du_film = [films]
 
-        #obtenir tous les renseignements du film
+        # Obtenir tous les renseignements du film
         df_film_choisi = df_machine_learning[(df_machine_learning["primaryTitle"] == films) | (df_machine_learning["originalTitle"] == films) | (df_machine_learning["French_Title"] == films)]
 
-        # on ne selectionne que les colonnes contenant des booleens sur la ligne du film choisi
+        # On ne selectionne que les colonnes contenant des booleens sur la ligne du film choisi
         film_choisi = df_film_choisi.iloc[:, 8:]
 
         #création de la matrice pour rechercher les 4 index des plus proches voisins (dont le film en question)
         distance, indice = model_KNN_distance.kneighbors(film_choisi)
 
-        #exemple si films = Titanic 
-        #distance : array([[    0.        , 12974.21700952, 16864.1850488 , 29052.04236607]])
-        #indice : array([[4074, 8763, 2972, 3377]])
-        # donc indice[0, 1:] = array([8763, 2972, 3377])
-
-        #création d'une variable tconst pour récupérer le numéro tconst du film
+        # Création d'une variable tconst pour récupérer le numéro tconst du film
         tconst = df_machine_learning.iloc[indice[0,1:]]['tconst'].values
         #st.write("On peut remplacer", films, "par :", tconst)
 
-        #création de la liste des suggestions à partir de la matrice
+        # Création de la liste des suggestions à partir de la matrice
         suggestion = df_machine_learning.iloc[indice[0,1:]]['primaryTitle'].values
         #st.write("On peut remplacer", films, "par :", suggestion)
-
-
-        # REQUETE API 
-        # site : https://www.omdbapi.com/
-        # demande de key API : key = aa10e4e0
-        #tconst = "tt0006864"  => pour l'exemple 
-        url_api = "http://www.omdbapi.com/?i="
-        key_api = "&apikey=aa10e4e0"
 
         # Création de colonnes
         col1 = st.columns(3)
@@ -160,8 +149,8 @@ with st.form("form 1"):
                 st.write(' - {} '.format(films))
 
 
-    # Résultat de la requete avec le tconst choisi = fichier jason = DATA 
-    #{"Title":"Intolerance","Year":"1916","Rated":"Passed","Released":"15 Jun 1917","Runtime":"163 min","Genre":"Drama, History","Director":"D.W. Griffith","Writer":"Hettie Grey Baker, Tod Browning, D.W. Griffith","Actors":"Lillian Gish, Robert Harron, Mae Marsh","Plot":"The story of a poor young woman separated by prejudice from her husband and baby is interwoven with tales of intolerance from throughout history.","Language":"English","Country":"United States","Awards":"2 wins","Poster":"https://m.media-amazon.com/images/M/MV5BZTc0YjA1ZjctOTFlZi00NWRiLWE2MTAtZDE1MWY1YTgzOTJjXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"7.7/10"},{"Source":"Rotten Tomatoes","Value":"97%"},{"Source":"Metacritic","Value":"99/100"}],"Metascore":"99","imdbRating":"7.7","imdbVotes":"16,027","imdbID":"tt0006864","Type":"movie","DVD":"07 Dec 1999","BoxOffice":"N/A","Production":"N/A","Website":"N/A","Response":"True"}
+# Résultat de la requete avec le tconst choisi = fichier jason = DATA 
+#{"Title":"Intolerance","Year":"1916","Rated":"Passed","Released":"15 Jun 1917","Runtime":"163 min","Genre":"Drama, History","Director":"D.W. Griffith","Writer":"Hettie Grey Baker, Tod Browning, D.W. Griffith","Actors":"Lillian Gish, Robert Harron, Mae Marsh","Plot":"The story of a poor young woman separated by prejudice from her husband and baby is interwoven with tales of intolerance from throughout history.","Language":"English","Country":"United States","Awards":"2 wins","Poster":"https://m.media-amazon.com/images/M/MV5BZTc0YjA1ZjctOTFlZi00NWRiLWE2MTAtZDE1MWY1YTgzOTJjXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"7.7/10"},{"Source":"Rotten Tomatoes","Value":"97%"},{"Source":"Metacritic","Value":"99/100"}],"Metascore":"99","imdbRating":"7.7","imdbVotes":"16,027","imdbID":"tt0006864","Type":"movie","DVD":"07 Dec 1999","BoxOffice":"N/A","Production":"N/A","Website":"N/A","Response":"True"}
 
 
 
@@ -170,7 +159,7 @@ with st.form("form 1"):
 with st.form("form 2"):
     
     # Indication utilisateur
-    st.subheader("OPTION 2 : Tu peux également choisir tes genres et ton acteur préférés sur une période souhaitée 👨⭐")
+    st.subheader("OPTION 2 : Tu peux également choisir tes genres et ton acteur préférés sur une période souhaitée 🕺⭐")
     
     # Mise en place des choix utilisateurs
     col1, col2, col3 = st.columns(3)
@@ -199,18 +188,12 @@ with st.form("form 2"):
                                                & (df_machine_learning["startYear"] <= end_year) ]
 
         #Créer un DF filtré SUR LA PERIODE ET LE GENRE renseignés par l'utilisateur
-
         df_year_genre_choisi = pd.DataFrame()
-
         for genre in genres : 
             df_genre= df_machine_learning[ (df_machine_learning[genre] == True) 
                                           & (df_machine_learning["startYear"] >= start_year) 
                                           & (df_machine_learning["startYear"] <= end_year) ]
             df_year_genre_choisi = pd.concat([df_year_genre_choisi , df_genre])
-
-
-            df_year_genre_choisi.head()
-
 
         # Classer dans l'ordre decroissant la colonne averageRating
         df_year_actor_choisi = df_year_actor_choisi.sort_values(by ='averageRating' , ascending = False)
@@ -227,15 +210,6 @@ with st.form("form 2"):
         # On récupère uniquement les nom des films  
         suggestion_acteur = df_top3_acteur_choisi.iloc[:,:]['primaryTitle'].values
         suggestion_genre = df_top3_genre_choisi.iloc[:,:]['primaryTitle'].values
-
-
-        # REQUETE API 
-        # site : https://www.omdbapi.com/
-        # demande de key API : key = aa10e4e0
-        #tconst = "tt0006864"  => pour l'exemple 
-        url_api = "http://www.omdbapi.com/?i="
-        key_api = "&apikey=aa10e4e0"
-
 
         # Prendre en compte l'absence d'acteur renseigné par l'utilisateur 
         if acteurs != "Choisis un acteur que tu aimes":
@@ -300,5 +274,4 @@ with st.form("form 2"):
     
 
 # SOUS-TITRE
-st.subheader("Bon visionnage !")
-
+st.subheader("Bon visionnage ! 🍿🍿🍿 ")
