@@ -85,7 +85,6 @@ X = df_machine_learning.iloc[:,8:]
 # On entraine notre modele uniquement sur les 4 voisin les plus proches sur l'ensemble des colonnes choisies (metric = calcul de la distance avec le calcul cosinus)
 model_KNN_distance = NearestNeighbors(n_neighbors = 4, metric = "cosine", algorithm = "brute").fit(X)
 
-"""
 # CHOIX DU FILM PAR L'UTILISATEUR
 
 with st.form("form 1"):
@@ -100,6 +99,7 @@ with st.form("form 1"):
     submit_1 = st.form_submit_button("Soumettre")
 
 
+"""
         
     # PROPOSITION DE L'ALGORITHME
 
