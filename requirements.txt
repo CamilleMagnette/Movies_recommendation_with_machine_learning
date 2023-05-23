@@ -1,4 +1,2 @@
 scikit-learn
 sklearn
-pandas
-streamlit
