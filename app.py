@@ -99,7 +99,7 @@ with st.form("form 1"):
     submit_1 = st.form_submit_button("Soumettre")
 
 
-"""
+
         
     # PROPOSITION DE L'ALGORITHME
 
@@ -110,7 +110,7 @@ with st.form("form 1"):
 
         # On ne selectionne que les colonnes contenant des booleens sur la ligne du film choisi
         film_choisi = df_film_choisi.iloc[:, 8:]
-
+"""
         #création de la matrice pour rechercher les 4 index des plus proches voisins (dont le film en question)
         distance, indice = model_KNN_distance.kneighbors(film_choisi)
 
