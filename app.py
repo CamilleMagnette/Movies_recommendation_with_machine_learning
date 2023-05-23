@@ -62,7 +62,7 @@ list_film_deroulante_acteurs = ["Choisis un acteur que tu aimes"] + list(liste_a
 list_film_deroulante_genres = list(liste_genres["genres"])
 
 
-"""
+
 # REQUETE API 
 
 # site : https://www.omdbapi.com/
@@ -71,7 +71,7 @@ url_api = "http://www.omdbapi.com/?i="
 key_api = "&apikey=aa10e4e0"
 
 
-
+"""
 # MACHINE LEARNING : recommandation sur la base du nom d'un film (tconst) en se basant sur les paramètres numériques suivants : startYear, runtimeMinutes, averageRating, numVotes, genres
 
 # Définir X => toutes les lignes et toutes les colonnes à partir d'index 8 (colonnes avec valeurs numériques)
