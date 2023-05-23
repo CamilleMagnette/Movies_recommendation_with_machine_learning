@@ -9,18 +9,18 @@ import requests
 
 
 # IMPORTER LES DATAFRAMES UTILISES QUAND ON EST SUR GIT HUB
-# liste_films = pd.read_pickle("./Databases/liste_films.pkl.gz")
-# liste_genres = pd.read_pickle("./Databases/liste_genres.pkl.gz")
-# liste_acteurs = pd.read_pickle("./Databases/liste_acteurs.pkl.gz")
-# liste_annees = pd.read_pickle("./Databases/liste_annees.pkl.gz")
-# df_machine_learning = pd.read_pickle("./Databases/df_machine_learning.pkl.gz")
+liste_films = pd.read_pickle("./Databases/liste_films.pkl.gz")
+liste_genres = pd.read_pickle("./Databases/liste_genres.pkl.gz")
+liste_acteurs = pd.read_pickle("./Databases/liste_acteurs.pkl.gz")
+liste_annees = pd.read_pickle("./Databases/liste_annees.pkl.gz")
+df_machine_learning = pd.read_pickle("./Databases/df_machine_learning.pkl.gz")
 
 # IMPORTER LES DATAFRAMES UTILISES QUAND ON EST EN LOCAL 
-liste_films = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_films.pkl.gz")
-liste_genres = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_genres.pkl.gz")
-liste_acteurs = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_acteurs.pkl.gz")
-liste_annees = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_annees.pkl.gz")
-df_machine_learning = pd.read_pickle("./df_machine_learning.pkl.gz")
+#liste_films = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_films.pkl.gz")
+#liste_genres = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_genres.pkl.gz")
+#liste_acteurs = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_acteurs.pkl.gz")
+#liste_annees = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_annees.pkl.gz")
+#df_machine_learning = pd.read_pickle("./df_machine_learning.pkl.gz")
 
 # SUPPRIMER LES DOUBLONS
 df_machine_learning = df_machine_learning.drop_duplicates(subset = "tconst")
