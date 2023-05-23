@@ -85,7 +85,7 @@ X = df_machine_learning.iloc[:,8:]
 # On entraine notre modele uniquement sur les 4 voisin les plus proches sur l'ensemble des colonnes choisies (metric = calcul de la distance avec le calcul cosinus)
 model_KNN_distance = NearestNeighbors(n_neighbors = 4, metric = "cosine", algorithm = "brute").fit(X)
 
-
+"""
 # CHOIX DU FILM PAR L'UTILISATEUR
 
 with st.form("form 1"):
@@ -113,8 +113,6 @@ with st.form("form 1"):
 
         # On ne selectionne que les colonnes contenant des booleens sur la ligne du film choisi
         film_choisi = df_film_choisi.iloc[:, 8:]
-
-"""
 
         #création de la matrice pour rechercher les 4 index des plus proches voisins (dont le film en question)
         distance, indice = model_KNN_distance.kneighbors(film_choisi)
@@ -154,7 +152,7 @@ with st.form("form 1"):
 # Résultat de la requete avec le tconst choisi = fichier jason = DATA 
 #{"Title":"Intolerance","Year":"1916","Rated":"Passed","Released":"15 Jun 1917","Runtime":"163 min","Genre":"Drama, History","Director":"D.W. Griffith","Writer":"Hettie Grey Baker, Tod Browning, D.W. Griffith","Actors":"Lillian Gish, Robert Harron, Mae Marsh","Plot":"The story of a poor young woman separated by prejudice from her husband and baby is interwoven with tales of intolerance from throughout history.","Language":"English","Country":"United States","Awards":"2 wins","Poster":"https://m.media-amazon.com/images/M/MV5BZTc0YjA1ZjctOTFlZi00NWRiLWE2MTAtZDE1MWY1YTgzOTJjXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"7.7/10"},{"Source":"Rotten Tomatoes","Value":"97%"},{"Source":"Metacritic","Value":"99/100"}],"Metascore":"99","imdbRating":"7.7","imdbVotes":"16,027","imdbID":"tt0006864","Type":"movie","DVD":"07 Dec 1999","BoxOffice":"N/A","Production":"N/A","Website":"N/A","Response":"True"}
 
-
+"""
 
 # CHOIX DU GENRE, DE L'ACTEUR ET DE LA PERIODE SOUHAITEE PAR L'UTILISATEUR
                             
