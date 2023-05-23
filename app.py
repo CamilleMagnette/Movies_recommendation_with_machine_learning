@@ -71,7 +71,7 @@ url_api = "http://www.omdbapi.com/?i="
 key_api = "&apikey=aa10e4e0"
 
 
-"""
+
 # MACHINE LEARNING : recommandation sur la base du nom d'un film (tconst) en se basant sur les paramètres numériques suivants : startYear, runtimeMinutes, averageRating, numVotes, genres
 
 # Définir X => toutes les lignes et toutes les colonnes à partir d'index 8 (colonnes avec valeurs numériques)
@@ -85,7 +85,7 @@ X = df_machine_learning.iloc[:,8:]
 # On entraine notre modele uniquement sur les 4 voisin les plus proches sur l'ensemble des colonnes choisies (metric = calcul de la distance avec le calcul cosinus)
 model_KNN_distance = NearestNeighbors(n_neighbors = 4, metric = "cosine", algorithm = "brute").fit(X)
 
-
+"""
 
 # CHOIX DU FILM PAR L'UTILISATEUR
 
