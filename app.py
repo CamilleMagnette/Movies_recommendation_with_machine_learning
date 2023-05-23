@@ -99,7 +99,7 @@ with st.form("form 1"):
     # Bouton submit
     submit_1 = st.form_submit_button("Soumettre")
 
-"""
+
         
     # PROPOSITION DE L'ALGORITHME
 
@@ -128,6 +128,7 @@ with st.form("form 1"):
         # Création de colonnes
         col1 = st.columns(3)
 
+"""
         # Boucle simultanée sur les deux paramètres : suggestion et tconst 
         for films, code_film, colonnes in zip(suggestion,tconst, col1):
 
