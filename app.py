@@ -271,7 +271,6 @@ with st.form("form 2"):
                     st.write(' - {} '.format(films_genre))
     
     
-"""
 
 # SOUS-TITRE
 st.subheader("Bon visionnage ! 🍿🍿🍿 ")
