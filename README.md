@@ -24,7 +24,7 @@ Outils principaux : Pandas, Seaborn
 Machine learning, recommandations    
 Outils principaux : scikit-learn 
 
-[LIEN STREMLIT](https://camillemagnette-application-cinema-app-8u0pz7.streamlit.app/)
+[LIEN STREMLIT](https://camillemagnette-systeme-de-recommandation-ma-app-acteurs-k992u6.streamlit.app/)
 
 #### Semaine 5 :  
 Affinage, présentation et Demo Day
