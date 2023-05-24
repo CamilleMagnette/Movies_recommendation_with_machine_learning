@@ -11,18 +11,18 @@ from sklearn.preprocessing import MinMaxScaler
 
 
 # IMPORTER LES DATAFRAMES UTILISES QUAND ON EST SUR GIT HUB
-liste_films = pd.read_pickle("./Databases/liste_films.pkl.gz")
-liste_genres = pd.read_pickle("./Databases/liste_genres.pkl.gz")
-liste_acteurs = pd.read_pickle("./Databases/liste_acteurs.pkl.gz")
-liste_annees = pd.read_pickle("./Databases/liste_annees.pkl.gz")
-df_machine_learning_clean = pd.read_pickle("./Databases/df_machine_learning_clean.pkl.gz")
+# liste_films = pd.read_pickle("./Databases/liste_films.pkl.gz")
+# liste_genres = pd.read_pickle("./Databases/liste_genres.pkl.gz")
+# liste_acteurs = pd.read_pickle("./Databases/liste_acteurs.pkl.gz")
+# liste_annees = pd.read_pickle("./Databases/liste_annees.pkl.gz")
+# df_machine_learning_clean = pd.read_pickle("./Databases/df_machine_learning_clean.pkl.gz")
 
 # IMPORTER LES DATAFRAMES UTILISES QUAND ON EST EN LOCAL 
-#liste_films = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_films.pkl.gz")
-#liste_genres = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_genres.pkl.gz")
-#liste_acteurs = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_acteurs.pkl.gz")
-#liste_annees = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_annees.pkl.gz")
-#df_machine_learning_clean = pd.read_pickle("./df_machine_learning_clean.pkl.gz")
+liste_films = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_films.pkl.gz")
+liste_genres = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_genres.pkl.gz")
+liste_acteurs = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_acteurs.pkl.gz")
+liste_annees = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_annees.pkl.gz")
+df_machine_learning_clean = pd.read_pickle("./df_machine_learning_clean.pkl.gz")
 
 # SUPPRIMER LES DOUBLONS
 df_machine_learning_clean = df_machine_learning_clean.drop_duplicates(subset = "tconst")
@@ -71,7 +71,7 @@ list_film_deroulante_genres = list(liste_genres["genres"])
 # demande de key API : key = aa10e4e0
 url_api = "http://www.omdbapi.com/?i="
 key_api = "&apikey=aa10e4e0"
-
+url_imdb = 'https://www.imdb.com/title/' # pour afficher le lien sur le site
 
 
 # MACHINE LEARNING : 
@@ -138,8 +138,8 @@ with st.form("form 1"):
 
             with colonnes:
 
-                url = url_api + str(code_film) + key_api   # on remplace tconst par code_film
-
+                url = url_api + str(code_film) + key_api  
+                url_imdb2 = url_imdb + str(code_film)
                 try:
                     response = requests.get(url)
                     #st.write(str(url))       
@@ -150,9 +150,12 @@ with st.form("form 1"):
 
                 except requests.exceptions.RequestException as e:
                     print('Une erreur est survenue lors de l\'appel à l\'API :', e)
-
-                st.write(' - {} '.format(films))
-
+ 
+                # Pour ajouter le lien du site imdb
+                if type(films) == str:
+                    st.write(f" - [{films}]({url_imdb2})")
+                else:
+                    st.write(f" - [{films}]({url_imdb2})")
 
 # Résultat de la requete avec le tconst choisi = fichier jason = DATA 
 #{"Title":"Intolerance","Year":"1916","Rated":"Passed","Released":"15 Jun 1917","Runtime":"163 min","Genre":"Drama, History","Director":"D.W. Griffith","Writer":"Hettie Grey Baker, Tod Browning, D.W. Griffith","Actors":"Lillian Gish, Robert Harron, Mae Marsh","Plot":"The story of a poor young woman separated by prejudice from her husband and baby is interwoven with tales of intolerance from throughout history.","Language":"English","Country":"United States","Awards":"2 wins","Poster":"https://m.media-amazon.com/images/M/MV5BZTc0YjA1ZjctOTFlZi00NWRiLWE2MTAtZDE1MWY1YTgzOTJjXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"7.7/10"},{"Source":"Rotten Tomatoes","Value":"97%"},{"Source":"Metacritic","Value":"99/100"}],"Metascore":"99","imdbRating":"7.7","imdbVotes":"16,027","imdbID":"tt0006864","Type":"movie","DVD":"07 Dec 1999","BoxOffice":"N/A","Production":"N/A","Website":"N/A","Response":"True"}
@@ -235,6 +238,7 @@ with st.form("form 2"):
                 with colonnes_acteur:
 
                     url1 = url_api + str(code_film_acteur) + key_api   # on remplace tconst par code_film
+                    url1_imdb2 = url_imdb + str(code_film_acteur)
 
                     try:
                         response = requests.get(url1)
@@ -247,9 +251,13 @@ with st.form("form 2"):
                     except requests.exceptions.RequestException as e:
                         print('Une erreur est survenue lors de l\'appel à l\'API :', e)
 
-                    st.write(' - {} '.format(films_acteur))
-
-
+                    # Pour ajouter le lien du site imdb
+                    if type(films_acteur) == str:
+                        st.write(f" - [{films_acteur}]({url1_imdb2})")
+                    else:
+                        st.write(f" - [{films_acteur}]({url1_imdb2})")
+                        
+                        
         # Prendre en compte l'absence de genres renseignés par l'utilisateur 
         if genres != []:
 
@@ -265,6 +273,7 @@ with st.form("form 2"):
                 with colonnes_genre:
 
                     url2 = url_api + str(code_film_genre) + key_api   # on remplace tconst par code_film
+                    url2_imdb2 = url_imdb + str(code_film_genre)
 
                     try:
                         response = requests.get(url2)
@@ -277,7 +286,11 @@ with st.form("form 2"):
                     except requests.exceptions.RequestException as e:
                         print('Une erreur est survenue lors de l\'appel à l\'API :', e)
 
-                    st.write(' - {} '.format(films_genre))
+                    # Pour ajouter le lien du site imdb
+                    if type(films_genre) == str:
+                        st.write(f" - [{films_genre}]({url2_imdb2})")
+                    else:
+                        st.write(f" - [{films_genre}]({url2_imdb2})")
     
     
     
