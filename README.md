@@ -1,4 +1,4 @@
-# 🎥 Outil de recommandation de films :
+# 🎥 Movies_recommendation_with_machine_learning
 
 Il s'agit ici du résultat du second projet mené pendant ma formation à la Wild Code School.
 
