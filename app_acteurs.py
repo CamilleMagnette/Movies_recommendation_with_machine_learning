@@ -9,21 +9,21 @@ from sklearn.preprocessing import StandardScaler
 import requests
 
 # IMPORTER LES DATAFRAMES UTILISES QUAND ON EST SUR GIT HUB
-liste_films = pd.read_pickle("./Databases/liste_films.pkl.gz")
-liste_genres = pd.read_pickle("./Databases/liste_genres.pkl.gz")
-liste_acteurs = pd.read_pickle("./Databases/liste_acteurs.pkl.gz")
-liste_annees = pd.read_pickle("./Databases/liste_annees.pkl.gz")
-df_machine_learning = pd.read_pickle("./Databases/df_machine_learning.pkl.gz")
+# liste_films = pd.read_pickle("./Databases/liste_films.pkl.gz")
+# liste_genres = pd.read_pickle("./Databases/liste_genres.pkl.gz")
+# liste_acteurs = pd.read_pickle("./Databases/liste_acteurs.pkl.gz")
+# liste_annees = pd.read_pickle("./Databases/liste_annees.pkl.gz")
+# df_machine_learning = pd.read_pickle("./Databases/df_machine_learning.pkl.gz")
 
 # IMPORTER LES DATAFRAMES UTILISES QUAND ON EST EN LOCAL 
-#liste_films = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_films.pkl.gz")
-#liste_genres = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_genres.pkl.gz")
-#liste_acteurs = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_acteurs.pkl.gz")
-#liste_annees = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_annees.pkl.gz")
-#df_machine_learning = pd.read_pickle("./df_machine_learning.pkl.gz")
+liste_films = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_films.pkl.gz")
+liste_genres = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_genres.pkl.gz")
+liste_acteurs = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_acteurs.pkl.gz")
+liste_annees = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_annees.pkl.gz")
+df_machine_learning_clean = pd.read_pickle("./df_machine_learning_clean.pkl.gz")
 
 # SUPPRIMER LES DOUBLONS
-df_machine_learning = df_machine_learning.drop_duplicates(subset = "tconst")
+df_machine_learning_clean = df_machine_learning_clean.drop_duplicates(subset = "tconst")
 
 
 
@@ -75,7 +75,7 @@ key_api = "&apikey=aa10e4e0"
 # MACHINE LEARNING : recommandation sur la base du nom d'un film (tconst) en se basant sur les paramètres numériques suivants : startYear, runtimeMinutes, averageRating, numVotes, genres
 
 # Définir X => toutes les lignes et toutes les colonnes à partir d'index 8 (colonnes avec valeurs numériques)
-X = df_machine_learning.iloc[:,8:] 
+X = df_machine_learning_clean.iloc[:,8:] 
 
 # Réaliser la standardisation : on harmonise l'échelle des abscisses et des ordonnées. 
 # On réindice l'ensemble des valeurs pour rentrer dans le même cadre d'analyse et réaliser des classifications. 
@@ -84,6 +84,8 @@ X = df_machine_learning.iloc[:,8:]
 
 # On entraine notre modele uniquement sur les 4 voisin les plus proches sur l'ensemble des colonnes choisies (metric = calcul de la distance avec le calcul cosinus)
 model_KNN_distance = NearestNeighbors(n_neighbors = 4, metric = "cosine", algorithm = "brute").fit(X)
+
+
 
 # CHOIX DU FILM PAR L'UTILISATEUR
 
@@ -98,28 +100,26 @@ with st.form("form 1"):
     # Bouton submit
     submit_1 = st.form_submit_button("Soumettre")
 
-
-
         
     # PROPOSITION DE L'ALGORITHME
 
     if submit_1 : 
 
         # Obtenir tous les renseignements du film
-        df_film_choisi = df_machine_learning[(df_machine_learning["primaryTitle"] == films) | (df_machine_learning["originalTitle"] == films) | (df_machine_learning["French_Title"] == films)]
+        df_film_choisi = df_machine_learning_clean[(df_machine_learning_clean["primaryTitle"] == films) | (df_machine_learning_clean["originalTitle"] == films) | (df_machine_learning_clean["French_Title"] == films)]
 
         # On ne selectionne que les colonnes contenant des booleens sur la ligne du film choisi
         film_choisi = df_film_choisi.iloc[:, 8:]
-"""
+
         #création de la matrice pour rechercher les 4 index des plus proches voisins (dont le film en question)
         distance, indice = model_KNN_distance.kneighbors(film_choisi)
 
         # Création d'une variable tconst pour récupérer le numéro tconst du film
-        tconst = df_machine_learning.iloc[indice[0,1:]]['tconst'].values
+        tconst = df_machine_learning_clean.iloc[indice[0,1:]]['tconst'].values
         #st.write("On peut remplacer", films, "par :", tconst)
 
         # Création de la liste des suggestions à partir de la matrice
-        suggestion = df_machine_learning.iloc[indice[0,1:]]['primaryTitle'].values
+        suggestion = df_machine_learning_clean.iloc[indice[0,1:]]['primaryTitle'].values
         #st.write("On peut remplacer", films, "par :", suggestion)
 
         # Création de colonnes
@@ -149,7 +149,7 @@ with st.form("form 1"):
 # Résultat de la requete avec le tconst choisi = fichier jason = DATA 
 #{"Title":"Intolerance","Year":"1916","Rated":"Passed","Released":"15 Jun 1917","Runtime":"163 min","Genre":"Drama, History","Director":"D.W. Griffith","Writer":"Hettie Grey Baker, Tod Browning, D.W. Griffith","Actors":"Lillian Gish, Robert Harron, Mae Marsh","Plot":"The story of a poor young woman separated by prejudice from her husband and baby is interwoven with tales of intolerance from throughout history.","Language":"English","Country":"United States","Awards":"2 wins","Poster":"https://m.media-amazon.com/images/M/MV5BZTc0YjA1ZjctOTFlZi00NWRiLWE2MTAtZDE1MWY1YTgzOTJjXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"7.7/10"},{"Source":"Rotten Tomatoes","Value":"97%"},{"Source":"Metacritic","Value":"99/100"}],"Metascore":"99","imdbRating":"7.7","imdbVotes":"16,027","imdbID":"tt0006864","Type":"movie","DVD":"07 Dec 1999","BoxOffice":"N/A","Production":"N/A","Website":"N/A","Response":"True"}
 
-"""
+
 
 # CHOIX DU GENRE, DE L'ACTEUR ET DE LA PERIODE SOUHAITEE PAR L'UTILISATEUR
                             
@@ -180,16 +180,16 @@ with st.form("form 2"):
     if submit_2 : 
 
         #Créer un DF filtré SUR L'ACTEUR renseigné par l'utilisateur
-        df_year_actor_choisi = df_machine_learning[ (df_machine_learning[acteurs] == True) 
-                                               & (df_machine_learning["startYear"] >= start_year) 
-                                               & (df_machine_learning["startYear"] <= end_year) ]
+        df_year_actor_choisi = df_machine_learning_clean[ (df_machine_learning_clean[acteurs] == True) 
+                                               & (df_machine_learning_clean["startYear"] >= start_year) 
+                                               & (df_machine_learning_clean["startYear"] <= end_year) ]
 
         #Créer un DF filtré SUR LA PERIODE ET LE GENRE renseignés par l'utilisateur
         df_year_genre_choisi = pd.DataFrame()
         for genre in genres : 
-            df_genre= df_machine_learning[ (df_machine_learning[genre] == True) 
-                                          & (df_machine_learning["startYear"] >= start_year) 
-                                          & (df_machine_learning["startYear"] <= end_year) ]
+            df_genre= df_machine_learning_clean[ (df_machine_learning_clean[genre] == True) 
+                                          & (df_machine_learning_clean["startYear"] >= start_year) 
+                                          & (df_machine_learning_clean["startYear"] <= end_year) ]
             df_year_genre_choisi = pd.concat([df_year_genre_choisi , df_genre])
 
         # Classer dans l'ordre decroissant la colonne averageRating
@@ -266,6 +266,7 @@ with st.form("form 2"):
                         print('Une erreur est survenue lors de l\'appel à l\'API :', e)
 
                     st.write(' - {} '.format(films_genre))
+    
     
     
 
