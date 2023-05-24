@@ -16,18 +16,19 @@ Outils principaux : Pandas, Matplotlib
 
 #### Semaine 2 et 3 : 
 Jointures, filtres, nettoyage, recherche de corrélation     
-Outils principaux : Pandas, Seaborn 
+Outils principaux : Pandas, Seaborn, DataPane
 
 [LIEN ANALYSE DES DONNEES SOUS DATAPANE 💡 📊](https://cloud.datapane.com/reports/VkGQlN3/exploration-des-donn%C3%A9es/)
 
 #### Semaine 4 :   
 Machine learning, recommandations    
-Outils principaux : scikit-learn 
+Outils principaux : scikit-learn, Streamlit 
 
 [LIEN APPLICATION UTILISATEUR SOUS STREMLIT ⭐ ♥️ ](https://camillemagnette-systeme-de-recommandation-ma-app-acteurs-k992u6.streamlit.app/)
 
 #### Semaine 5 :  
 Affinage, présentation et Demo Day
+Outils principaux : power-point, DataPane, Streamlit 
 
 [LIEN PRESENTATION]
 
