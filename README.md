@@ -12,19 +12,19 @@ Création d'un système de recommandation de films pour le compte d'un gérant d
 Appropriation et première exploration des données     
 Outils principaux : Pandas, Matplotlib   
 
-[LIEN ETAPES DE RETRAVAIL DES TABLES](https://drive.google.com/file/d/1iXXQbu4YkMxPZo_fVW3diYWcnWd2xKq-/view?usp=sharing)
+[LIEN DIAGRAMME DE RETRAVAIL DES TABLES](https://drive.google.com/file/d/1iXXQbu4YkMxPZo_fVW3diYWcnWd2xKq-/view?usp=sharing)
 
 #### Semaine 2 et 3 :  
 Jointures, filtres, nettoyage, recherche de corrélation     
 Outils principaux : Pandas, Seaborn 
 
-[LIEN GRAPHIQUES](https://cloud.datapane.com/reports/VkGQlN3/exploration-des-donn%C3%A9es/)
+[LIEN ANALYSE DES DONNES SOUS DATAPANE](https://cloud.datapane.com/reports/VkGQlN3/exploration-des-donn%C3%A9es/)
 
 #### Semaine 4 :   
 Machine learning, recommandations    
 Outils principaux : scikit-learn 
 
-[LIEN STREMLIT](https://camillemagnette-systeme-de-recommandation-ma-app-acteurs-k992u6.streamlit.app/)
+[LIEN APPLICATION UTILISATEUR SOUS STREMLIT](https://camillemagnette-systeme-de-recommandation-ma-app-acteurs-k992u6.streamlit.app/)
 
 #### Semaine 5 :  
 Affinage, présentation et Demo Day
