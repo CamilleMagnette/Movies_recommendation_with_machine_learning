@@ -4,25 +4,25 @@ Il s'agit ici du résultat du second projet mené pendant ma formation à la Wil
 
 ## 🎯 Objectif du projet :
 
-Création d'un système de recommandation de films pour le compte d'un gérant de cinéma, situé dans la Creuse, dans le but de l'aider à la sélection de films pour ses clients locaux (client fictif)
+Création d'un système de recommandation de films pour le compte d'un gérant de cinéma situé dans la Creuse afin de l'aider à selectionner des films pour ses clients locaux.
 
 ## ✅ Etapes : 
 
 #### Semaine 1 :  
 Appropriation et première exploration des données     
-Outils principaux : Pandas, Matplotlib   
+Outils principaux : Pandas, Matplotlib, jupyterLab   
 
 [LIEN DIAGRAMME DE RETRAVAIL DES TABLES 💪 🕺](https://drive.google.com/file/d/1iXXQbu4YkMxPZo_fVW3diYWcnWd2xKq-/view?usp=sharing)
 
 #### Semaine 2 et 3 : 
 Jointures, filtres, nettoyage, recherche de corrélation     
-Outils principaux : Pandas, Seaborn, DataPane
+Outils principaux : Pandas, Seaborn, DataPane, jupyterLab
 
 [LIEN ANALYSE DES DONNEES SOUS DATAPANE 💡 📊](https://cloud.datapane.com/reports/VkGQlN3/exploration-des-donn%C3%A9es/)
 
 #### Semaine 4 :   
 Machine learning, recommandations    
-Outils principaux : scikit-learn, Streamlit 
+Outils principaux : scikit-learn, Streamlit, jupyterLab, GitHub 
 
 [LIEN APPLICATION UTILISATEUR SOUS STREMLIT ⭐ ♥️ ](https://camillemagnette-systeme-de-recommandation-ma-app-acteurs-k992u6.streamlit.app/)
 
