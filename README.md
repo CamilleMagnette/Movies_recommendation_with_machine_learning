@@ -18,7 +18,7 @@ Outils principaux : Pandas, Matplotlib
 Jointures, filtres, nettoyage, recherche de corrélation     
 Outils principaux : Pandas, Seaborn 
 
-[LIEN ANALYSE DES DONNES SOUS DATAPANE 💡 📊](https://cloud.datapane.com/reports/VkGQlN3/exploration-des-donn%C3%A9es/)
+[LIEN ANALYSE DES DONNEES SOUS DATAPANE 💡 📊](https://cloud.datapane.com/reports/VkGQlN3/exploration-des-donn%C3%A9es/)
 
 #### Semaine 4 :   
 Machine learning, recommandations    
