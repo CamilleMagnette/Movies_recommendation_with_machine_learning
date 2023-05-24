@@ -5,22 +5,24 @@ import streamlit as st
 import pandas as pd 
 from sklearn.neighbors import NearestNeighbors
 #from sklearn import datasets
-from sklearn.preprocessing import StandardScaler
+#from sklearn.preprocessing import StandardScaler
 import requests
+from sklearn.preprocessing import MinMaxScaler
+
 
 # IMPORTER LES DATAFRAMES UTILISES QUAND ON EST SUR GIT HUB
-liste_films = pd.read_pickle("./Databases/liste_films.pkl.gz")
-liste_genres = pd.read_pickle("./Databases/liste_genres.pkl.gz")
-liste_acteurs = pd.read_pickle("./Databases/liste_acteurs.pkl.gz")
-liste_annees = pd.read_pickle("./Databases/liste_annees.pkl.gz")
-df_machine_learning_clean = pd.read_pickle("./Databases/df_machine_learning_clean.pkl.gz")
+# liste_films = pd.read_pickle("./Databases/liste_films.pkl.gz")
+# liste_genres = pd.read_pickle("./Databases/liste_genres.pkl.gz")
+# liste_acteurs = pd.read_pickle("./Databases/liste_acteurs.pkl.gz")
+# liste_annees = pd.read_pickle("./Databases/liste_annees.pkl.gz")
+# df_machine_learning_clean = pd.read_pickle("./Databases/df_machine_learning_clean.pkl.gz")
 
 # IMPORTER LES DATAFRAMES UTILISES QUAND ON EST EN LOCAL 
-#liste_films = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_films.pkl.gz")
-#liste_genres = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_genres.pkl.gz")
-#liste_acteurs = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_acteurs.pkl.gz")
-#liste_annees = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_annees.pkl.gz")
-#df_machine_learning_clean = pd.read_pickle("./df_machine_learning_clean.pkl.gz")
+liste_films = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_films.pkl.gz")
+liste_genres = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_genres.pkl.gz")
+liste_acteurs = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_acteurs.pkl.gz")
+liste_annees = pd.read_pickle("./FICHIERS POUR MACHINE LEARNING/liste_annees.pkl.gz")
+df_machine_learning_clean = pd.read_pickle("./df_machine_learning_clean.pkl.gz")
 
 # SUPPRIMER LES DOUBLONS
 df_machine_learning_clean = df_machine_learning_clean.drop_duplicates(subset = "tconst")
@@ -72,15 +74,21 @@ key_api = "&apikey=aa10e4e0"
 
 
 
-# MACHINE LEARNING : recommandation sur la base du nom d'un film (tconst) en se basant sur les paramètres numériques suivants : startYear, runtimeMinutes, averageRating, numVotes, genres
+# MACHINE LEARNING : 
+# Recommandation sur la base du nom d'un film (tconst) en se basant sur les paramètres numériques suivants : startYear, runtimeMinutes, averageRating, numVotes, genres et acteurs
 
-# Définir X => toutes les lignes et toutes les colonnes à partir d'index 8 (colonnes avec valeurs numériques)
-X = df_machine_learning_clean.iloc[:,8:] 
+# Standardisation : on harmonise l'échelle des abscisses et des ordonnées =>  On réindice l'ensemble des valeurs pour rentrer dans le même cadre d'analyse et réaliser des classifications. 
+scaling = MinMaxScaler()
+df_machine_learning_clean[["averageRating", "numVotes", "runtimeMinutes", "startYear"]] = scaling.fit_transform(df_machine_learning_clean[["averageRating", "numVotes", "runtimeMinutes", "startYear"]])
 
-# Réaliser la standardisation : on harmonise l'échelle des abscisses et des ordonnées. 
-# On réindice l'ensemble des valeurs pour rentrer dans le même cadre d'analyse et réaliser des classifications. 
-# scaler = preprocessing.StandardScaler().fit(X)
-# X_scaled = scaler.transform(X)
+# Récupération des noms des colonnes sans prendre tconst + primaryTitle + originalTitle + French_Title 
+colonnes_ml = df_machine_learning_clean.columns[4:]
+
+# Création de la variable X qui prends en variables explicatives toutes les colonnes avec des valeurs boléennes - PAS BESOIN DE SCALER => toutes les lignes et toutes les colonnes à partir d'index 8 
+# X = df_machine_learning_clean.iloc[:,8:] 
+
+# Création de la variable X qui prends en variables explicatives toutes les colonnes numériques et boléennes sauf (voir celles ci-dessus)
+X = df_machine_learning_clean.loc[:, colonnes_ml]
 
 # On entraine notre modele uniquement sur les 4 voisin les plus proches sur l'ensemble des colonnes choisies (metric = calcul de la distance avec le calcul cosinus)
 model_KNN_distance = NearestNeighbors(n_neighbors = 4, metric = "cosine", algorithm = "brute").fit(X)
@@ -109,7 +117,7 @@ with st.form("form 1"):
         df_film_choisi = df_machine_learning_clean[(df_machine_learning_clean["primaryTitle"] == films) | (df_machine_learning_clean["originalTitle"] == films) | (df_machine_learning_clean["French_Title"] == films)]
 
         # On ne selectionne que les colonnes contenant des booleens sur la ligne du film choisi
-        film_choisi = df_film_choisi.iloc[:, 8:]
+        film_choisi = df_film_choisi.iloc[:, 4:]
 
         #création de la matrice pour rechercher les 4 index des plus proches voisins (dont le film en question)
         distance, indice = model_KNN_distance.kneighbors(film_choisi)
@@ -179,19 +187,23 @@ with st.form("form 2"):
     
     if submit_2 : 
 
-        #Créer un DF filtré SUR L'ACTEUR renseigné par l'utilisateur
-        df_year_actor_choisi = df_machine_learning_clean[ (df_machine_learning_clean[acteurs] == True) 
-                                               & (df_machine_learning_clean["startYear"] >= start_year) 
-                                               & (df_machine_learning_clean["startYear"] <= end_year) ]
+        df_machine_learning_clean_year = pd.merge(liste_annees[liste_annees['startYear'].between(start_year, end_year)], df_machine_learning_clean, how = 'left', left_on = 'tconst', right_on = 'tconst')  
 
+        
+        #Créer un DF filtré SUR L'ACTEUR renseigné par l'utilisateur
+        #df_year_actor_choisi = df_machine_learning_clean_year[ (df_machine_learning_clean_year[acteurs] == True) & (df_machine_learning_clean_year["startYear"] >= start_year) & (df_machine_learning_clean_year["startYear"] <= end_year) ]
+        df_year_actor_choisi = df_machine_learning_clean_year[(df_machine_learning_clean_year[acteurs] == True)]
+        
         #Créer un DF filtré SUR LA PERIODE ET LE GENRE renseignés par l'utilisateur
         df_year_genre_choisi = pd.DataFrame()
         for genre in genres : 
-            df_genre= df_machine_learning_clean[ (df_machine_learning_clean[genre] == True) 
-                                          & (df_machine_learning_clean["startYear"] >= start_year) 
-                                          & (df_machine_learning_clean["startYear"] <= end_year) ]
+            #df_genre= df_machine_learning_clean_year[ (df_machine_learning_clean_year[genre] == True) & (df_machine_learning_clean_year["startYear"] >= start_year) & (df_machine_learning_clean_year["startYear"] <= end_year) ]
+            df_genre= df_machine_learning_clean_year[ (df_machine_learning_clean_year[genre] == True) ]
+            
             df_year_genre_choisi = pd.concat([df_year_genre_choisi , df_genre])
 
+
+            
         # Classer dans l'ordre decroissant la colonne averageRating
         df_year_actor_choisi = df_year_actor_choisi.sort_values(by ='averageRating' , ascending = False)
         df_year_genre_choisi = df_year_genre_choisi.sort_values(by ='averageRating' , ascending = False)
