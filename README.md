@@ -30,7 +30,7 @@ Outils principaux : scikit-learn, Streamlit, jupyterLab, GitHub
 Affinage, présentation et Demo Day
 Outils principaux : power-point, DataPane, Streamlit 
 
-[LIEN PRESENTATION](https://docs.google.com/presentation/d/1gj3ad8wrEavljcQOztckorOYIql3RnAA/edit?usp=sharing&ouid=108131034072250905752&rtpof=true&sd=true)
+[LIEN PRESENTATION](https://drive.google.com/file/d/1OIF1iphDbTM9wzEyo2xPHQg5SVK1z_EW/view?usp=sharing)
 
 
 ## 🎬 Source des données :  
