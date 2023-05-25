@@ -12,7 +12,7 @@ Création d'un système de recommandation de films pour le compte d'un gérant d
 Appropriation et première exploration des données     
 Outils principaux : Pandas, Matplotlib, jupyterLab   
 
-[LIEN DIAGRAMME DE RETRAVAIL DES TABLES 💪 🕺](https://drive.google.com/file/d/1iCfra90jKrgcGnx5wnn-kUvJvrGCfeIK/view?usp=sharing)
+[LIEN DIAGRAMME DE RETRAVAIL DES TABLES 💪 🕺](https://drive.google.com/file/d/17TfOcP2BalAt5omnFj4_L5hGJK4bfPqt/view?usp=sharing)
 
 #### Semaine 2 et 3 : 
 Jointures, filtres, nettoyage, recherche de corrélation     
