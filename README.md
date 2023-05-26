@@ -36,6 +36,7 @@ Outils principaux : power-point, DataPane, Streamlit
 ## 🎬 Source des données :  
 -[base IMDb](https://datasets.imdbws.com/)   
 -[Explication datasets](https://www.imdb.com/interfaces/)
+-[API Omdb](https://www.omdbapi.com/)
 
 
 ## 📎 Méthodologie technique :
